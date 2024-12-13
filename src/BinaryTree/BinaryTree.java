@@ -1,18 +1,22 @@
 package BinaryTree;
+
 class BinaryNode<AnyType extends Comparable<AnyType>> {
     public AnyType element;
     public BinaryNode<AnyType> left;
     public BinaryNode<AnyType> right;
+
     public BinaryNode() {
-        this(null,null,null);
+        this(null, null, null);
     }
+
     public BinaryNode(AnyType el) {
-        this(el,null,null);
+        this(el, null, null);
     }
-    public BinaryNode(AnyType el,BinaryNode<AnyType> l,BinaryNode<AnyType> r) {
-        element=el;
-        right=r;
-        left=l;
+
+    public BinaryNode(AnyType el, BinaryNode<AnyType> l, BinaryNode<AnyType> r) {
+        element = el;
+        right = r;
+        left = l;
     }
 }
 
@@ -21,101 +25,86 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
     public BinaryNode<AnyType> root;
 
     public BinaryTree() {
-        root=null;
+        root = null;
     }
 
     public BinaryTree(AnyType r) {
-        root=new BinaryNode<AnyType>(r,null,null);
+        root = new BinaryNode<AnyType>(r, null, null);
     }
 
     public BinaryTree(BinaryNode<AnyType> r) {
-        root=r;
+        root = r;
     }
+
     public BinaryTree(AnyType[] array) {
-        root=VektortoTree(array);
+        root = VektortoTree(array);
     }
 
     public void makeEmpty() {
-        root=null;
+        root = null;
     }
 
     public boolean isEmpty() {
-        return root==null;
+        return root == null;
     }
 
     public int height(BinaryNode<AnyType> t) {
-        if (t == null)
-            return -1;
-        else
-            return 1 + Math.max(height(t.left), height(t.right));
+        if (t == null) return -1;
+        else return 1 + Math.max(height(t.left), height(t.right));
     }
 
     public int depth(BinaryNode<AnyType> node) {
-        if (node==null)
-            return -1;
+        if (node == null) return -1;
         BinaryNode<AnyType> current = root;
         int depth = 0;
 
-        while (current!=node)
-        {
-            if (node.element.compareTo(current.element)<0)
-                current=current.left;
-            else
-                current=current.right;
+        while (current != node) {
+            if (node.element.compareTo(current.element) < 0) current = current.left;
+            else current = current.right;
             depth++;
         }
         return depth;
     }
 
-    public int depth(BinaryNode<AnyType> current,BinaryNode<AnyType> node) {
-        if (node==null)
-            return -1;
-        if (current==node)
-            return 0;
+    public int depth(BinaryNode<AnyType> current, BinaryNode<AnyType> node) {
+        if (node == null) return -1;
+        if (current == node) return 0;
 
-        if (node.element.compareTo(current.element)<0)
-            return 1+ depth(current.left,node);
-        else
-            return 1+ depth(current.right,node);
+        if (node.element.compareTo(current.element) < 0) return 1 + depth(current.left, node);
+        else return 1 + depth(current.right, node);
     }
 
     public void printInorder(BinaryNode<Integer> node) {
-        if (node == null)
-            return;
+        if (node == null) return;
         printInorder(node.left);
         System.out.print(node.element + " ");
         printInorder(node.right);
     }
 
     public void printPreorder(BinaryNode<Integer> node) {
-        if (node == null)
-            return;
+        if (node == null) return;
         System.out.print(node.element + " ");
         printPreorder(node.left);
         printPreorder(node.right);
     }
 
     public void printPostorder(BinaryNode<Integer> node) {
-        if (node == null)
-            return;
+        if (node == null) return;
         printPostorder(node.left);
         printPostorder(node.right);
         System.out.print(node.element + " ");
     }
 
     public void printEven(BinaryNode<Integer> node) {
-        if (node == null)
-            return;
-        if (node.element%2==0)
-            System.out.print(node.element + " ");
+        if (node == null) return;
+        if (node.element % 2 == 0) System.out.print(node.element + " ");
         printEven(node.left);
         printEven(node.right);
     }
+
     public void printOdd(BinaryNode<Integer> node) {
-        if (node == null)
-            return;
-        if (node.element%2==1)
-            System.out.print(node.element + " ");
+        if (node == null) return;
+        if (node.element % 2 == 1) System.out.print(node.element + " ");
         printOdd(node.left);
         printOdd(node.right);
     }
@@ -125,7 +114,7 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
             root = node;
             return;
         }
-        insertHelper(root,node);
+        insertHelper(root, node);
         //balanceTree();
     }
 
@@ -136,6 +125,7 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
     public void balanceTree() {
         root = balanceTree(root);
     }
+
     public int nr_leaf(BinaryNode<AnyType> root) {
         if (root == null) {
             return 0;
@@ -147,17 +137,15 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
     }
 
 
-    public BinaryNode<AnyType> findParent (BinaryNode<AnyType>node) {
-        return findParentHelper(root,node);
+    public BinaryNode<AnyType> findParent(BinaryNode<AnyType> node) {
+        return findParentHelper(root, node);
     }
 
     public BinaryNode<AnyType> removeLeaf(BinaryNode<AnyType> current) {
 
-        if (current == null)
-            return null;
+        if (current == null) return null;
 
-        if (current.left == null && current.right == null)
-            return null;
+        if (current.left == null && current.right == null) return null;
 
         current.left = removeLeaf(current.left);
         current.right = removeLeaf(current.right);
@@ -166,34 +154,28 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
     }
 
     private void insertHelper(BinaryNode<AnyType> current, BinaryNode<AnyType> newNode) {
-        if (newNode.element.compareTo(current.element)<0)
-        {
-            if (current.left==null){
-                current.left=newNode;
-            }
-            else
-                insertHelper(current.left,newNode);
-        }
-        else {
-            if (current.right==null){
-                current.right=newNode;
-            }
-            else
-                insertHelper(current.right,newNode);
+        if (newNode.element.compareTo(current.element) < 0) {
+            if (current.left == null) {
+                current.left = newNode;
+            } else insertHelper(current.left, newNode);
+        } else {
+            if (current.right == null) {
+                current.right = newNode;
+            } else insertHelper(current.right, newNode);
         }
     }
 
-    private  BinaryNode<AnyType> VektortoTree(AnyType[] array) {
+    private BinaryNode<AnyType> VektortoTree(AnyType[] array) {
         BinaryTree<AnyType> tree = new BinaryTree<AnyType>();
         sort(array);
         invertArray(array);
 
-         for (int i = array.length/2;i>=0;i--)
-             tree.insert(new BinaryNode<>(array[i]));
-         for (int i = 1+ (array.length/2);i<array.length;i++ )
-             tree.insert(new BinaryNode<>(array[i]));
+        for (int i = array.length / 2; i >= 0; i--)
+            tree.insert(new BinaryNode<>(array[i]));
+        for (int i = 1 + (array.length / 2); i < array.length; i++)
+            tree.insert(new BinaryNode<>(array[i]));
 
-         return tree.root;
+        return tree.root;
     }
 
     private BinaryNode<AnyType> fshiHelper(BinaryNode<AnyType> current, AnyType x) {
@@ -226,7 +208,7 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
     }
 
     private BinaryNode<AnyType> findParentHelper(BinaryNode<AnyType> Root, BinaryNode<AnyType> child) {
-        if (child==null){
+        if (child == null) {
             System.out.println("Femija eshte null");
             return null;
         }
@@ -250,6 +232,7 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
             return Root;
         }
     }
+
     private BinaryNode<AnyType> findParentHelper2(BinaryNode<AnyType> root, BinaryNode<AnyType> child) {
         if (child == null) {
             System.out.println("Child is null");
@@ -290,22 +273,19 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
     }
 
     private int balance(BinaryNode<AnyType> node) {
-        return node!=null ? (height(node.left)-height(node.right)) : 0;
+        return node != null ? (height(node.left) - height(node.right)) : 0;
     }
+
     private BinaryNode<AnyType> balanceTree(BinaryNode<AnyType> t) {
-        if (t == null)
-            return null;
+        if (t == null) return null;
 
         int balance = balance(t);
 
         if (balance > 1) {
-            if (balance(t.left)<0)
-                t.left = rotateLeft(t.left);
+            if (balance(t.left) < 0) t.left = rotateLeft(t.left);
             t = rotateRight(t);
-        }
-        else if (balance < -1) {
-            if (balance(t.right) > 0)
-                t.right = rotateRight(t.right);
+        } else if (balance < -1) {
+            if (balance(t.right) > 0) t.right = rotateRight(t.right);
             t = rotateLeft(t);
         }
 
@@ -330,7 +310,6 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
     }
 
 
-
     public void sort(AnyType arr[]) {
         int n = arr.length;
         for (int i = 0; i < n - 1; i++) {
@@ -344,6 +323,7 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
             }
         }
     }
+
     public void invertArray(AnyType[] array) {
 
         int start = 0;
@@ -359,51 +339,46 @@ public class BinaryTree<AnyType extends Comparable<AnyType>> {
             end--;
         }
     }
-    public void arrayTree(AnyType V[])
-    {
+
+    public void arrayTree(AnyType V[]) {
         sort(V);
         invertArray(V);
-        root = arrayToTree(V,0,V.length-1);
+        root = arrayToTree(V, 0, V.length - 1);
     }
 
-    private BinaryNode<AnyType> arrayToTree(AnyType V[],int fillimi,int fundi)
-    {
-        if (fillimi > fundi){
+    private BinaryNode<AnyType> arrayToTree(AnyType V[], int fillimi, int fundi) {
+        if (fillimi > fundi) {
             return null;
         }
-        int mesi  = (fillimi+fundi)/2;
+        int mesi = (fillimi + fundi) / 2;
 
-        BinaryNode <AnyType> node = new BinaryNode<AnyType>(V[mesi]);
+        BinaryNode<AnyType> node = new BinaryNode<AnyType>(V[mesi]);
 
-        node.right = arrayToTree(V,fillimi,mesi-1);
+        node.right = arrayToTree(V, fillimi, mesi - 1);
 
-        node.left = arrayToTree(V,mesi+1,fundi);
+        node.left = arrayToTree(V, mesi + 1, fundi);
 
         return node;
     }
 
     public boolean isComplete(BinaryNode<AnyType> root, int index, int numri_nyje) {
-        if (root == null)
-            return true;
-        if (index >= numri_nyje)
-            return false;
-        return isComplete(root.left, 2 * index+1 , numri_nyje) && isComplete(root.right, 2 * index + 2, numri_nyje);
+        if (root == null) return true;
+        if (index >= numri_nyje) return false;
+        return isComplete(root.left, 2 * index + 1, numri_nyje) && isComplete(root.right, 2 * index + 2, numri_nyje);
     }
 
-    public boolean isHeap1(BinaryNode<AnyType> root)
-    {
-        if (root==null){
+    public boolean isHeap1(BinaryNode<AnyType> root) {
+        if (root == null) {
             return true;
         }
-        if ((root.left==null||root.element.compareTo(root.left.element)<0)&&((root.right==null||root.element.compareTo(root.right.element)<0)))
-        {
-            return isHeap1(root.left)&&isHeap1(root.right);
+        if ((root.left == null || root.element.compareTo(root.left.element) < 0) && ((root.right == null || root.element.compareTo(root.right.element) < 0))) {
+            return isHeap1(root.left) && isHeap1(root.right);
         }
         return false;
     }
-    public boolean isHeap(BinaryNode<AnyType> node)
-    {
-        return isComplete(node,0,nr_leaf(node))&&(isHeap1(node.left)||isHeap1(node.right));
+
+    public boolean isHeap(BinaryNode<AnyType> node) {
+        return isComplete(node, 0, nr_leaf(node)) && (isHeap1(node.left) || isHeap1(node.right));
     }
 }
 

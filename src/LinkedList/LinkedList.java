@@ -69,8 +69,7 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
 
     /*Ushtrimi 1*/
     public double Shuma(LinkedList<Double> list) throws Exception {
-        if (list.isEmpty())
-            throw new Exception("Lista eshte boshe");
+        if (list.isEmpty()) throw new Exception("Lista eshte boshe");
 
         /*LinkedListIterator<Double>itr = list.first();
         double shuma = 0;
@@ -92,8 +91,7 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
 
     /*Ushtrimi 2*/
     public int size() {
-        if (isEmpty())
-            return 0;
+        if (isEmpty()) return 0;
 
         LinkedListIterator<AnyType> itr = first();
         int size = 0;
@@ -114,8 +112,7 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
 
     /*Ushtrimi 3*/
     public AnyType Value(int k) throws Exception {
-        if (isEmpty())
-            throw new Exception("Lista eshte boshe");
+        if (isEmpty()) throw new Exception("Lista eshte boshe");
 
         if (size() < k) {
             throw new Exception("Lista nuk e permban nyjen e:" + k + "-te");
@@ -147,8 +144,7 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
 
     /*Ushtrimi 4*/
     public void Remove_K_Element(AnyType K) throws Exception {
-        if (isEmpty())
-            throw new Exception("Lista eshte boshe");
+        if (isEmpty()) throw new Exception("Lista eshte boshe");
 
         ListNode<AnyType> current = header.next;
         ListNode<AnyType> previous = header;
@@ -159,18 +155,15 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
         }
         if (current != null) {
             previous.next = current.next;
-        } else
-            throw new Exception("Nuk ndodhet ne liste");
+        } else throw new Exception("Nuk ndodhet ne liste");
     }
 
     /*Ushtrimi 5*/
     public void Shto_Element(AnyType K, int j) throws Exception {
 
-        if (size() < j - 1)
-            throw new Exception("Nuk mund te shtohet ne liste");
+        if (size() < j - 1) throw new Exception("Nuk mund te shtohet ne liste");
 
-        if (j == 0)
-            throw new Exception("Nuk mund te jete koka e listes");
+        if (j == 0) throw new Exception("Nuk mund te jete koka e listes");
 
 
         LinkedListIterator<AnyType> itr = zeroth();
@@ -198,10 +191,8 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
 
     /*Ushtrimi 7*/
     public void Max_Min(LinkedList<Double> list) throws Exception {
-        if (list.isEmpty())
-            throw new Exception("Lista eshte boshe");
-        if (list.size() == 1)
-            throw new Exception("Nuk mund te gjendet nje Max ose Min");
+        if (list.isEmpty()) throw new Exception("Lista eshte boshe");
+        if (list.size() == 1) throw new Exception("Nuk mund te gjendet nje Max ose Min");
 
         ListNode<Double> current = list.header.next;
         ListNode<Double> maxPrev = null;
@@ -257,8 +248,7 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
      * Metoda funksionon per te gjitha rastet edhe kur listat jane te renditura.
      */
     public void FshiElemente2Lista(LinkedList<AnyType> L, LinkedList<AnyType> P) throws Exception {
-        if (L.isEmpty() || P.isEmpty())
-            throw new Exception("Njera prej listave eshte bosh");
+        if (L.isEmpty() || P.isEmpty()) throw new Exception("Njera prej listave eshte bosh");
 
         LinkedListIterator<?> itr = P.first();
 
@@ -280,8 +270,7 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
 
     /*Ushtrimi 9*/
     public void inverto() throws Exception {
-        if (isEmpty())
-            throw new Exception("Lista eshte boshe");
+        if (isEmpty()) throw new Exception("Lista eshte boshe");
 
         ListNode<AnyType> current = header.next;
         ListNode<AnyType> prev = null, next;
@@ -323,10 +312,8 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
             previous = current;
             current = current.next;
         }
-        if (current.next != null)
-            previous.next = new ListNode<AnyType>(K, previous.next);
-        else
-            current.next = new ListNode<AnyType>(K, null);
+        if (current.next != null) previous.next = new ListNode<AnyType>(K, previous.next);
+        else current.next = new ListNode<AnyType>(K, null);
     }
 
     /*Ushtrimi 12*/
@@ -346,10 +333,8 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
     }
 
     public void NdrroVendinFqinj(LinkedListIterator<AnyType> P, String S) throws Exception {
-        if (size() < 2)
-            throw new Exception("Nuk mund te ndrrohen vendet");
-        if (!P.isValid())
-            throw new Exception("Referenca eshte null");
+        if (size() < 2) throw new Exception("Nuk mund te ndrrohen vendet");
+        if (!P.isValid()) throw new Exception("Referenca eshte null");
 
         LinkedListIterator<AnyType> itr;
         if (S.equals("Majtas")) {
@@ -385,8 +370,7 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
 
     /*Ushtrimi 13*/
     public void Rrethore() throws Exception {
-        if (isEmpty())
-            throw new Exception("Lista eshte bosh,nuk mund te kthehet rrethore");
+        if (isEmpty()) throw new Exception("Lista eshte bosh,nuk mund te kthehet rrethore");
 
         ListNode<AnyType> current = header.next;
 
@@ -447,41 +431,33 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
         }
         return L3;
     }
-    public LinkedList<AnyType> Alternim(LinkedList<AnyType> L2)
-    {
+
+    public LinkedList<AnyType> Alternim(LinkedList<AnyType> L2) {
         LinkedList<AnyType> L3 = new LinkedList<AnyType>();
         ListNode<AnyType> current_L1 = this.header.next;
         ListNode<AnyType> current_L2 = L2.header.next;
         int i = 0;
-        while (current_L1!=null||current_L2!=null)
-        {
-            if (current_L1!=null&&current_L2!=null)
-            {
-                if (i%2==0)
-                {
+        while (current_L1 != null || current_L2 != null) {
+            if (current_L1 != null && current_L2 != null) {
+                if (i % 2 == 0) {
                     L3.insertAtEnd(current_L1);
                     current_L1 = current_L1.next;
-                }
-                else
-                {
+                } else {
                     L3.insertAtEnd(current_L2);
                     current_L2 = current_L2.next;
                 }
                 i++;
-            }
-            else if(current_L2!=null)
-            {
+            } else if (current_L2 != null) {
                 L3.insertAtEnd(current_L2);
                 current_L2 = current_L2.next;
-            }
-            else
-            {
+            } else {
                 L3.insertAtEnd(current_L1);
                 current_L1 = current_L1.next;
             }
         }
         return L3;
     }
+
     public void insertAtEnd(ListNode<AnyType> node) {
 
         ListNode<AnyType> current = header;
@@ -546,44 +522,39 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
 
         while (current != null) {
 
-            if ((Double) current.element % 2 == 0)
-                L1.insertAtEnd(current);
-            else
-                L2.insertAtEnd(current);
+            if ((Double) current.element % 2 == 0) L1.insertAtEnd(current);
+            else L2.insertAtEnd(current);
             current = current.next;
         }
-
 
 
         LinkedList.printList(L1);
         LinkedList.printList(L2);
     }
-    public static void main(String[] args) throws Exception
-    {
+
+    public static void main(String[] args) throws Exception {
         LinkedList<Double> list = new LinkedList<Double>();
         LinkedList<Double> list1 = new LinkedList<Double>();
 
         LinkedListIterator<Double> itr = list.zeroth();
         LinkedListIterator<Double> itr1 = list1.zeroth();
-        for (double i = 0;i<13;i++)
-        {
-          list1.insert(i,itr1);
-          itr1.advance();
+        for (double i = 0; i < 13; i++) {
+            list1.insert(i, itr1);
+            itr1.advance();
         }
-        for (double i = 7;i<20;i++)
-        {
-          list.insert(i,itr);
-          itr.advance();
+        for (double i = 7; i < 20; i++) {
+            list.insert(i, itr);
+            itr.advance();
         }
 
-        System.out.println("Gjatesia e listes se pare: "+ list.size());
-        System.out.println("Gjatesia e listes se dyte: "+ list1.size());
+        System.out.println("Gjatesia e listes se pare: " + list.size());
+        System.out.println("Gjatesia e listes se dyte: " + list1.size());
 
         System.out.println("Lista e pare:");
         printList(list);
-        System.out.println("Shuma e elementeve "+list.Shuma(list));
+        System.out.println("Shuma e elementeve " + list.Shuma(list));
 
-        System.out.println("Vlera e elementit me indeks 4: "+list.Value(4));
+        System.out.println("Vlera e elementit me indeks 4: " + list.Value(4));
 
         System.out.println("Fshijme elementin me vlere 15.0");
         list.Remove_K_Element(15.0);
@@ -592,10 +563,10 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
         printList(list);
 
         System.out.println("Shtojme element ne indeksin 6");
-        list.Shto_Element(3.0,6);
+        list.Shto_Element(3.0, 6);
         printList(list);
 
-        System.out.println("Nr i elementeve qe ndodhen midis 7.0 dhe 13.0: " + list.ElementetMidis(list.find(7.0),list.find(13.0)));
+        System.out.println("Nr i elementeve qe ndodhen midis 7.0 dhe 13.0: " + list.ElementetMidis(list.find(7.0), list.find(13.0)));
 
         list.Max_Min(list);
         System.out.println("Lista me Max ne fillim dhe Min ne fund");
@@ -605,7 +576,7 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
         System.out.println("Lista e invertuar:");
         printList(list);
 
-        System.out.println("A eshte palindrome? "+(list.palindrome()?"Po":"Jo"));
+        System.out.println("A eshte palindrome? " + (list.palindrome() ? "Po" : "Jo"));
 
         System.out.println("Shtojme 17.3 pa prishur renditjen");
         //list.ShtoPaPrishurRenditjen(list,17.3);
@@ -615,13 +586,13 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
         System.out.println("Lista me vendet e ndrruara");
         printList(list);
 
-        list.FshiElemente2Lista(list,list1);
+        list.FshiElemente2Lista(list, list1);
         System.out.println("Fshijme elementet nga lista e pare qe ndodhen ne listen e dyte:");
         printList(list);
 
         System.out.println("Ndrrojme nje element");
-        list.NdrroVendinFqinj(list.find(18.0),"Djathtas");
-        list.NdrroVendinFqinj(list.find(13.0),"Majtas");
+        list.NdrroVendinFqinj(list.find(18.0), "Djathtas");
+        list.NdrroVendinFqinj(list.find(13.0), "Majtas");
         printList(list);
 
 
@@ -631,8 +602,8 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
 
         System.out.println("Lista e dyte:");
         printList(list1);
-        System.out.println("Shuma e elementeve "+list1.Shuma(list1));
-        System.out.println("Vlera e elementit me indeks 4: "+list1.Value(4));
+        System.out.println("Shuma e elementeve " + list1.Shuma(list1));
+        System.out.println("Vlera e elementit me indeks 4: " + list1.Value(4));
 
         System.out.println("Fshijme elementin me vlere 6.0");
         list1.Remove_K_Element(6.0);
@@ -641,10 +612,10 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
         printList(list1);
 
         System.out.println("Shtojme element ne indeksin 6");
-        list1.Shto_Element(15.0,6);
+        list1.Shto_Element(15.0, 6);
         printList(list1);
 
-        System.out.println("Nr i elementeve qe ndodhen midis 3.0 dhe 10.0: " + list1.ElementetMidis(list1.find(3.0),list1.find(10.0)));
+        System.out.println("Nr i elementeve qe ndodhen midis 3.0 dhe 10.0: " + list1.ElementetMidis(list1.find(3.0), list1.find(10.0)));
 
         list1.Max_Min(list1);
         System.out.println("Lista me Max ne fillim dhe Min ne fund");
@@ -654,7 +625,7 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
         System.out.println("Lista e invertuar:");
         printList(list1);
 
-        System.out.println("A eshte palindrome? "+(list1.palindrome()?"Po":"Jo"));
+        System.out.println("A eshte palindrome? " + (list1.palindrome() ? "Po" : "Jo"));
 
         System.out.println("Shtojme 4.3 pa prishur renditjen");
         //list1.ShtoPaPrishurRenditjen(list1,4.3);
@@ -664,13 +635,13 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
         System.out.println("Lista me vendet e ndrruara");
         printList(list1);
 
-        list1.FshiElemente2Lista(list1,list);
+        list1.FshiElemente2Lista(list1, list);
         System.out.println("Fshijme elementet nga lista e dyte qe ndodhen ne listen e pare:");
         printList(list1);
 
         System.out.println("Ndrrojme nje element");
-        list1.NdrroVendinFqinj(list1.find(8.0),"Djathtas");
-        list1.NdrroVendinFqinj(list1.find(11.0),"Majtas");
+        list1.NdrroVendinFqinj(list1.find(8.0), "Djathtas");
+        list1.NdrroVendinFqinj(list1.find(11.0), "Majtas");
         printList(list1);
 
 
@@ -681,19 +652,18 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
         LinkedList<Double> list2 = new LinkedList<Double>();
         LinkedListIterator<Double> itr2 = list2.zeroth();
 
-        list2.Shto_Element(0.0,1);
-        list2.Shto_Element(1.0,2);
-        list2.Shto_Element(0.0,3);
+        list2.Shto_Element(0.0, 1);
+        list2.Shto_Element(1.0, 2);
+        list2.Shto_Element(0.0, 3);
 
         System.out.println("Lista e trete:");
         printList(list2);
 
-        System.out.println("A eshte palindrome? "+(list2.palindrome()?"Po":"Jo"));
+        System.out.println("A eshte palindrome? " + (list2.palindrome() ? "Po" : "Jo"));
 
         list2.makeEmpty();
-        for (double i = 0;i<13;i++)
-        {
-            list2.insert(i,itr2);
+        for (double i = 0; i < 13; i++) {
+            list2.insert(i, itr2);
             itr2.advance();
         }
 
@@ -710,17 +680,15 @@ public class LinkedList<AnyType extends Comparable<AnyType>> {
 
         LinkedList<Double> list3 = new LinkedList<Double>();
         LinkedListIterator<Double> itr3 = list3.zeroth();
-        for (double i = 0;i<10;i+=2)
-        {
-            list3.insert(i,itr3);
+        for (double i = 0; i < 10; i += 2) {
+            list3.insert(i, itr3);
             itr3.advance();
         }
 
         LinkedList<Double> list4 = new LinkedList<Double>();
         LinkedListIterator<Double> itr4 = list4.zeroth();
-        for (double i =-2.0;i<10;i++)
-        {
-            list4.insert(i,itr4);
+        for (double i = -2.0; i < 10; i++) {
+            list4.insert(i, itr4);
             itr4.advance();
         }
         //list3.BashkoDyLista(list4);

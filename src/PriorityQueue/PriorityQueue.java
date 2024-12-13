@@ -10,99 +10,83 @@ import java.util.Iterator;
 
 import java.util.NoSuchElementException;
 
-public class PriorityQueue<AnyType> extends AbstractCollection<AnyType>
-
-{
+public class PriorityQueue<AnyType> extends AbstractCollection<AnyType> {
 
     private static final int DEFAULT_CAPACITY = 100;
 
     private int currentSize;
 
-    private AnyType [ ] array;
+    private AnyType[] array;
 
     private Comparator<? super AnyType> cmp;
 
     @SuppressWarnings("unchecked")
 
-    public PriorityQueue( )
-
-    {
+    public PriorityQueue() {
 
         currentSize = 0;
 
         cmp = null;
 
-        array = (AnyType[]) new Object[ DEFAULT_CAPACITY + 1 ];
+        array = (AnyType[]) new Object[DEFAULT_CAPACITY + 1];
 
     }
 
-    public PriorityQueue( Comparator<? super AnyType> c )
-
-    {
+    public PriorityQueue(Comparator<? super AnyType> c) {
 
         currentSize = 0;
 
         cmp = c;
 
-        array = (AnyType[]) new Object[ DEFAULT_CAPACITY + 1 ];
+        array = (AnyType[]) new Object[DEFAULT_CAPACITY + 1];
 
     }
 
-    public PriorityQueue( Collection<? extends AnyType> coll )
-
-    {
+    public PriorityQueue(Collection<? extends AnyType> coll) {
 
         cmp = null;
 
-        currentSize = coll.size( );
+        currentSize = coll.size();
 
-        array = (AnyType[]) new Object[ ( currentSize + 2 ) * 11 / 10 ];
+        array = (AnyType[]) new Object[(currentSize + 2) * 11 / 10];
 
         int i = 1;
 
-        for( AnyType item : coll )
+        for (AnyType item : coll)
 
-            array[ i++ ] = item;
+            array[i++] = item;
 
-        buildHeap( );
+        buildHeap();
 
     }
 
-    public int size( )
-
-    {
+    public int size() {
 
         return currentSize;
 
     }
 
-    public void clear( )
-
-    {
+    public void clear() {
 
         currentSize = 0;
 
     }
 
-    public AnyType element( )
+    public AnyType element() {
 
-    {
+        if (isEmpty())
 
-        if( isEmpty( ) )
-
-            throw new NoSuchElementException( );
+            throw new NoSuchElementException();
 
         return array[1];
 
     }
 
-    public boolean add( AnyType x )
+    public boolean add(AnyType x) {
 
-    {
+        if (currentSize + 1 == array.length)
 
-        if( currentSize + 1 == array.length )
-
-            doubleArray( );
+            doubleArray();
 
 // Percolate up
 
@@ -110,51 +94,45 @@ public class PriorityQueue<AnyType> extends AbstractCollection<AnyType>
 
         array[0] = x;
 
-        for( ; compare( x, array[ hole / 2 ] ) < 0; hole /= 2 )
+        for (; compare(x, array[hole / 2]) < 0; hole /= 2)
 
-            array[ hole ] = array[ hole / 2 ];
+            array[hole] = array[hole / 2];
 
-        array[ hole ] = x;
+        array[hole] = x;
 
         return true;
 
     }
 
-    public AnyType remove( )
+    public AnyType remove() {
 
-    {
+        AnyType minItem = element();
 
-        AnyType minItem = element( );
+        array[1] = array[currentSize--];
 
-        array[ 1 ] = array[ currentSize-- ];
-
-        percolateDown( 1 );
+        percolateDown(1);
 
         return minItem;
 
     }
 
-    private void percolateDown( int hole )
-
-    {
+    private void percolateDown(int hole) {
 
         int child;
 
-        AnyType tmp = array[ hole ];
+        AnyType tmp = array[hole];
 
-        for( ; hole * 2 <= currentSize; hole = child )
-
-        {
+        for (; hole * 2 <= currentSize; hole = child) {
 
             child = hole * 2;
 
-            if( child != currentSize && compare( array[ child + 1 ], array[ child ] ) < 0 )
+            if (child != currentSize && compare(array[child + 1], array[child]) < 0)
 
                 child++;
 
-            if( compare( array[ child ], tmp ) < 0 )
+            if (compare(array[child], tmp) < 0)
 
-                array[ hole ] = array[ child ];
+                array[hole] = array[child];
 
             else
 
@@ -162,57 +140,49 @@ public class PriorityQueue<AnyType> extends AbstractCollection<AnyType>
 
         }
 
-        array[ hole ] = tmp;
+        array[hole] = tmp;
 
     }
 
-    private void buildHeap( )
+    private void buildHeap() {
 
-    {
+        for (int i = currentSize / 2; i > 0; i--)
 
-        for( int i = currentSize / 2; i > 0; i-- )
-
-            percolateDown( i );
+            percolateDown(i);
 
     }
 
-    private void doubleArray( )
-
-    {
+    private void doubleArray() {
 
         AnyType[] newArray;
 
-        newArray=(AnyType[]) new Object[array.length*2];
+        newArray = (AnyType[]) new Object[array.length * 2];
 
-        for(int i=0;i<array.length;i++)
+        for (int i = 0; i < array.length; i++) {
 
-        {
-
-            newArray[i]=array[i];
+            newArray[i] = array[i];
 
         }
 
-        array=newArray;
+        array = newArray;
 
     }
 
-    private int compare( AnyType lhs, AnyType rhs )
+    private int compare(AnyType lhs, AnyType rhs) {
 
-    {
+        if (cmp == null)
 
-        if( cmp == null )
-
-            return ((Comparable) lhs).compareTo( rhs );
+            return ((Comparable) lhs).compareTo(rhs);
 
         else
 
-            return cmp.compare( lhs, rhs );
+            return cmp.compare(lhs, rhs);
 
     }
 
     public void zvogeloPrioritet(int index, int sasia) {
 
-        array[index]=(AnyType)(Object)((int)array[index]-sasia);
+        array[index] = (AnyType) (Object) ((int) array[index] - sasia);
 
         percolateDown(index);
 
@@ -220,19 +190,17 @@ public class PriorityQueue<AnyType> extends AbstractCollection<AnyType>
 
     public void fshi(int index) {
 
-        array[index]=array[currentSize--];
+        array[index] = array[currentSize--];
 
         buildHeap();
 
     }
 
-    public void print()
+    public void print() {
 
-    {
+        for (int i = 1; i <= size(); i++)
 
-        for(int i=1;i<=size();i++)
-
-            System.out.print(" "+array[i]);
+            System.out.print(" " + array[i]);
 
     }
 

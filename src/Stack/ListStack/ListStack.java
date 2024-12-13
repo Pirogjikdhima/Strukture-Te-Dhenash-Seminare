@@ -1,62 +1,58 @@
 package Stack.ListStack;
 
-public class ListStack<AnyType>
-{
+public class ListStack<AnyType> {
     private ListNode<AnyType> topOfStack = null;
-    public boolean isEmpty( )
-    {
+
+    public boolean isEmpty() {
         return topOfStack == null;
     }
-    public void makeEmpty( )
-    {
+
+    public void makeEmpty() {
         topOfStack = null;
     }
-    public void push( AnyType x )
-    {
-        topOfStack = new ListNode<AnyType>( x, topOfStack );
+
+    public void push(AnyType x) {
+        topOfStack = new ListNode<AnyType>(x, topOfStack);
     }
-    public void pop( )
-    {
-        if( isEmpty( ) )  {
-            System.out.println( "ListStack pop" );
+
+    public void pop() {
+        if (isEmpty()) {
+            System.out.println("ListStack pop");
             return;
         }
         topOfStack = topOfStack.next;
     }
-    public AnyType top( )
-    {
-        if( isEmpty( ) )  {
-            System.out.println( "ListStack top" );
+
+    public AnyType top() {
+        if (isEmpty()) {
+            System.out.println("ListStack top");
             return null;
         }
-        return topOfStack.element; }
-    public AnyType topAndPop( )
-    {
-         if( isEmpty( ) )  {
-             System.out.println( "ListStack topAndPop" );
-             return null;
-         }
-         AnyType topItem = topOfStack.element;
-         topOfStack = topOfStack.next;
-         return topItem;
+        return topOfStack.element;
     }
 
-    public void PutOnTopKthElemet(int k)
-    {
-    ListStack<AnyType> temp_list = new ListStack<>();
-    int size = -1;
-    while (!isEmpty())
-        {
+    public AnyType topAndPop() {
+        if (isEmpty()) {
+            System.out.println("ListStack topAndPop");
+            return null;
+        }
+        AnyType topItem = topOfStack.element;
+        topOfStack = topOfStack.next;
+        return topItem;
+    }
+
+    public void PutOnTopKthElemet(int k) {
+        ListStack<AnyType> temp_list = new ListStack<>();
+        int size = -1;
+        while (!isEmpty()) {
             temp_list.push(topAndPop());
             size++;
         }
 
-    AnyType top = null;
+        AnyType top = null;
 
-    for(int i = 0;i<=size;i++)
-        {
-            if(i == k)
-            {
+        for (int i = 0; i <= size; i++) {
+            if (i == k) {
                 top = temp_list.topAndPop();
                 continue;
             }
@@ -64,23 +60,21 @@ public class ListStack<AnyType>
         }
         push(top);
     }
-    public void printStack()
-    {
+
+    public void printStack() {
         ListStack<AnyType> temp_list = new ListStack<>();
-        while (!isEmpty())
-        {
+        while (!isEmpty()) {
             temp_list.push(topAndPop());
         }
-        while (!temp_list.isEmpty())
-        {
-            System.out.print(temp_list.top()+" ");
+        while (!temp_list.isEmpty()) {
+            System.out.print(temp_list.top() + " ");
             push(temp_list.topAndPop());
         }
     }
 
     public static void main(String[] args) {
         ListStack<Integer> list = new ListStack<>();
-        for (int i = 0;i<9;i++){
+        for (int i = 0; i < 9; i++) {
             list.push(i);
         }
         list.printStack();
@@ -92,16 +86,16 @@ public class ListStack<AnyType>
 
 }
 
-class ListNode<AnyType>
-{
+class ListNode<AnyType> {
     public AnyType element;
     public ListNode next;
-    public ListNode( AnyType theElement )
-    {
-        this( theElement, null );
+
+    public ListNode(AnyType theElement) {
+        this(theElement, null);
     }
-    public ListNode( AnyType theElement, ListNode<AnyType> n )
-    {
-        element = theElement; next = n;
+
+    public ListNode(AnyType theElement, ListNode<AnyType> n) {
+        element = theElement;
+        next = n;
     }
 }
